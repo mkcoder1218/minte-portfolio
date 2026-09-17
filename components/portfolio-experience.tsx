@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -17,7 +17,6 @@ type ProjectCategory = {
   n: string;
   title: string;
   icon: string;
-  type: string;
   format: string;
   count: string;
   tone: string;
@@ -30,70 +29,91 @@ const projects: ProjectCategory[] = [
     n: "01",
     title: "Long Tea",
     icon: "🍵",
-    type: "Brand content",
     format: "TikTok",
-    count: "08 projects",
+    count: "14 projects",
     tone: "green",
-    copy: "Eight short-form brand edits created for Long Tea.",
+    copy: "Fourteen short-form edits created for Long Tea.",
     works: [
-      { label: "Long Tea — 01", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVueMQDh/" },
-      { label: "Long Tea — 02", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVuePkKa/" },
-      { label: "Long Tea — 03", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVue58DG/" },
-      { label: "Long Tea — 04", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVuereDc/" },
-      { label: "Long Tea — 05", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVueBfsw/" },
-      { label: "Long Tea — 06", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVuePnd9/" },
-      { label: "Long Tea — 07", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVue8g6C/" },
-      { label: "Long Tea — 08", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVue2yVf/" },
+      { label: "Long Tea — 01", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqp5ou1F/" },
+      { label: "Long Tea — 02", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqp5tyJT/" },
+      { label: "Long Tea — 03", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqp5Kt6W/" },
+      { label: "Long Tea — 04", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqp5ooU8/" },
+      { label: "Long Tea — 05", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqp5WaKS/" },
+      { label: "Long Tea — 06", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqp53j1j/" },
+      { label: "Long Tea — 07", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqp5tGrp/" },
+      { label: "Long Tea — 08", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqpaFDbf/" },
+      { label: "Long Tea — 09", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqpaMwwp/" },
+      { label: "Long Tea — 10", platform: "TikTok · Brand Content", href: "https://www.tiktok.com/@longtea.et/video/7679022110173449490" },
+      { label: "Long Tea — 11", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqpakApv/" },
+      { label: "Long Tea — 12", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqpa2DwF/" },
+      { label: "Long Tea — 13", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqpaFQa1/" },
+      { label: "Long Tea — 14", platform: "TikTok · Brand Content", href: "https://vt.tiktok.com/ZSqpmxC5T/" },
     ],
   },
   {
     n: "02",
-    title: "Pizza Hut",
-    icon: "🍕",
-    type: "Brand video",
-    format: "Instagram",
-    count: "01 project",
+    title: "Golden Tulip Hotel",
+    icon: "🏨",
+    format: "TikTok",
+    count: "09 projects",
     tone: "coral",
-    copy: "A social-first Pizza Hut brand edit built for Instagram.",
+    copy: "Nine social-first video edits created for Golden Tulip Hotel.",
     works: [
-      { label: "Pizza Hut", platform: "Instagram · Brand Video", href: "https://www.instagram.com/reel/DbVEgmvDvQ3/" },
+      { label: "Golden Tulip — 01", platform: "TikTok · Hotel Content", href: "https://vt.tiktok.com/ZSqpaAeJe/" },
+      { label: "Golden Tulip — 02", platform: "TikTok · Hotel Content", href: "https://vt.tiktok.com/ZSqpa3JPY/" },
+      { label: "Golden Tulip — 03", platform: "TikTok · Hotel Content", href: "https://vt.tiktok.com/ZSqpaU4dW/" },
+      { label: "Golden Tulip — 04", platform: "TikTok · Hotel Content", href: "https://vt.tiktok.com/ZSqpax3MD/" },
+      { label: "Golden Tulip — 05", platform: "TikTok · Hotel Content", href: "https://vt.tiktok.com/ZSqpax4Sd/" },
+      { label: "Golden Tulip — 06", platform: "TikTok · Hotel Content", href: "https://vt.tiktok.com/ZSqpaW6jf/" },
+      { label: "Golden Tulip — 07", platform: "TikTok · Hotel Content", href: "https://vt.tiktok.com/ZSqpaW3d2/" },
+      { label: "Golden Tulip — 08", platform: "TikTok · Hotel Content", href: "https://vt.tiktok.com/ZSqpasBma/" },
+      { label: "Golden Tulip — 09", platform: "TikTok · Hotel Content", href: "https://vt.tiktok.com/ZSqpa7fky/" },
     ],
   },
   {
     n: "03",
-    title: "Social Media",
-    icon: "📱",
-    type: "Social content",
+    title: "Coldstone",
+    icon: "🍨",
     format: "TikTok",
-    count: "12 projects",
+    count: "05 projects",
     tone: "violet",
-    copy: "Twelve platform-native short-form edits made for social audiences.",
+    copy: "Five energetic food and lifestyle edits created for Coldstone.",
     works: [
-      { label: "Social Media — 01", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVuewU9V/" },
-      { label: "Social Media — 02", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVueKTfC/" },
-      { label: "Social Media — 03", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudAwDN/" },
-      { label: "Social Media — 04", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVuddmuf/" },
-      { label: "Social Media — 05", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudLD5y/" },
-      { label: "Social Media — 06", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudAUQV/" },
-      { label: "Social Media — 07", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudLkSo/" },
-      { label: "Social Media — 08", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudd6X3/" },
-      { label: "Social Media — 09", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudj5VG/" },
-      { label: "Social Media — 10", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudVWv4/" },
-      { label: "Social Media — 11", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudxXRb/" },
-      { label: "Social Media — 12", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudynUR/" },
+      { label: "Coldstone — 01", platform: "TikTok · Food Content", href: "https://vt.tiktok.com/ZSqpaVvKf/" },
+      { label: "Coldstone — 02", platform: "TikTok · Food Content", href: "https://vt.tiktok.com/ZSqpatyDU/" },
+      { label: "Coldstone — 03", platform: "TikTok · Food Content", href: "https://vt.tiktok.com/ZSqpa9Nph/" },
+      { label: "Coldstone — 04", platform: "TikTok · Food Content", href: "https://vt.tiktok.com/ZSqpm6Jva/" },
+      { label: "Coldstone — 05", platform: "TikTok · Food Content", href: "https://vt.tiktok.com/ZSqpmjYdM/" },
     ],
   },
   {
     n: "04",
-    title: "Other Projects",
-    icon: "🎬",
-    type: "Video",
-    format: "YouTube",
-    count: "01 project",
+    title: "Pizza Hut",
+    icon: "🍕",
+    format: "TikTok",
+    count: "02 projects",
     tone: "blue",
-    copy: "Additional long-form and experimental video work.",
+    copy: "Two fast-paced social edits created for Pizza Hut.",
     works: [
-      { label: "Other Project — 01", platform: "YouTube · Video", href: "https://youtu.be/gl6KID5tw0U" },
+      { label: "Pizza Hut — 01", platform: "TikTok · Food Content", href: "https://vt.tiktok.com/ZSqpm8QB2/" },
+      { label: "Pizza Hut — 02", platform: "TikTok · Food Content", href: "https://vt.tiktok.com/ZSqpmYy2P/" },
+    ],
+  },
+  {
+    n: "05",
+    title: "Rad Best Furniture",
+    icon: "🛋️",
+    format: "TikTok",
+    count: "06 projects",
+    tone: "green",
+    copy: "Six product-focused social edits created for Rad Best Furniture.",
+    works: [
+      { label: "Rad Best Furniture — 01", platform: "TikTok · Product Content", href: "https://vt.tiktok.com/ZSqpmGhJp/" },
+      { label: "Rad Best Furniture — 02", platform: "TikTok · Product Content", href: "https://vt.tiktok.com/ZSqpmqMTK/" },
+      { label: "Rad Best Furniture — 03", platform: "TikTok · Product Content", href: "https://vt.tiktok.com/ZSqpmta6f/" },
+      { label: "Rad Best Furniture — 04", platform: "TikTok · Product Content", href: "https://vt.tiktok.com/ZSqpmGshr/" },
+      { label: "Rad Best Furniture — 05", platform: "TikTok · Product Content", href: "https://vt.tiktok.com/ZSqpmXv7g/" },
+      { label: "Rad Best Furniture — 06", platform: "TikTok · Product Content", href: "https://vt.tiktok.com/ZSqpmX3RS/" },
     ],
   },
 ];
@@ -113,6 +133,19 @@ export default function PortfolioExperience() {
   const root = useRef<HTMLElement>(null);
   const [activeProject, setActiveProject] = useState<string | null>(null);
   const selectedProject = projects.find((project) => project.n === activeProject) ?? null;
+
+  useEffect(() => {
+    if (!activeProject) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById("selected-project-work")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeProject]);
 
   useGSAP(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -236,7 +269,7 @@ export default function PortfolioExperience() {
       </section>
 
       <section className="work wrap section" id="work">
-        <div className="work-head" data-reveal><div><span className="index">03 / SELECTED WORK</span><h2>MY<br />PROJECTS.</h2></div><p>Choose a category to explore Mintesnot&apos;s original work. Every project below keeps the real links from the previous portfolio.</p></div>
+        <div className="work-head" data-reveal><div><span className="index">03 / SELECTED WORK</span><h2>CLIENT<br />PROJECTS.</h2></div><p>Choose a client to explore Mintesnot&apos;s published work across real brand campaigns and social content.</p></div>
         <div className="project-grid">
           {projects.map((p) => (
             <article className="project" key={p.n}>
@@ -263,9 +296,9 @@ export default function PortfolioExperience() {
         </div>
 
         {selectedProject && (
-          <div id="selected-project-work" className="project-work-list" style={{ marginTop: 82 }}>
+          <div id="selected-project-work" className="project-work-list" style={{ marginTop: 82, scrollMarginTop: 24 }}>
             <div className="work-head" style={{ marginBottom: 42 }}>
-              <div><span className="index">{selectedProject.n} / CATEGORY</span><h2 style={{ marginTop: 28 }}>{selectedProject.title.toUpperCase()}</h2></div>
+              <div><span className="index">{selectedProject.n} / CLIENT</span><h2 style={{ marginTop: 28 }}>{selectedProject.title.toUpperCase()}</h2></div>
               <p>{selectedProject.count}. Select a piece to open the original published work.</p>
             </div>
             <div className="service-list">
