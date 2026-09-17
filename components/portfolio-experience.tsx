@@ -330,7 +330,12 @@ export default function PortfolioExperience() {
 
       <section className="contact wrap section" id="contact" data-reveal>
         <span className="index">05 / CONTACT</span><p className="contact-kicker">HAVE A PROJECT IN MIND?</p><h2>LET&apos;S MAKE<br /><em>SOMETHING.</em></h2>
-        <div className="contact-links"><a href="https://wa.me/251905559398" target="_blank" rel="noreferrer">WhatsApp <Arrow /></a><a href="https://www.instagram.com/outofsync.genz/" target="_blank" rel="noreferrer">Instagram <Arrow /></a><a href="tel:+251905559398">Call +251 905 559 398 <Arrow /></a></div>
+        <div className="contact-links">
+          <a href="mailto:Mintesnotsaleamlak@gmail.com">Email · Mintesnotsaleamlak@gmail.com <Arrow /></a>
+          <a href="tel:0905559398">Phone · 0905559398 <Arrow /></a>
+          <a href="https://www.instagram.com/outofsync.genz/" target="_blank" rel="noreferrer">Instagram · @outofsync.genz <Arrow /></a>
+          <a href="https://linkedin.com/in/mintesnot-saleamlak-133391365" target="_blank" rel="noreferrer">LinkedIn · Mintesnot Saleamlak <Arrow /></a>
+        </div>
       </section>
 
       <footer className="footer wrap"><span>© 2026 MINTESNOT SALEAMLAK</span><span>VIDEO EDITOR / VISUAL STORYTELLER</span><a href="#top">BACK TO TOP ↑</a></footer>
