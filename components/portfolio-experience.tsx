@@ -1,17 +1,101 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const projects = [
-  { n: "01", title: "Tea Brand", type: "Brand film", format: "Campaign", count: "06 edits", tone: "green", copy: "Product-first storytelling shaped with rhythm, typography and tactile motion." },
-  { n: "02", title: "Pizza Spot", type: "Food social", format: "Reels", count: "08 edits", tone: "coral", copy: "Fast social cuts designed around appetite, energy and scroll-stopping pacing." },
-  { n: "03", title: "Social Cuts", type: "Short form", format: "Vertical", count: "05 edits", tone: "violet", copy: "Platform-native edits balancing hooks, captions, sound design and retention." },
-  { n: "04", title: "Film Study", type: "Cinematic", format: "Sequence", count: "03 edits", tone: "blue", copy: "A slower visual study focused on mood, color, composition and emotional timing." },
+type ProjectWork = {
+  label: string;
+  platform: string;
+  href: string;
+};
+
+type ProjectCategory = {
+  n: string;
+  title: string;
+  icon: string;
+  type: string;
+  format: string;
+  count: string;
+  tone: string;
+  copy: string;
+  works: ProjectWork[];
+};
+
+const projects: ProjectCategory[] = [
+  {
+    n: "01",
+    title: "Long Tea",
+    icon: "🍵",
+    type: "Brand content",
+    format: "TikTok",
+    count: "08 projects",
+    tone: "green",
+    copy: "Eight short-form brand edits created for Long Tea.",
+    works: [
+      { label: "Long Tea — 01", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVueMQDh/" },
+      { label: "Long Tea — 02", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVuePkKa/" },
+      { label: "Long Tea — 03", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVue58DG/" },
+      { label: "Long Tea — 04", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVuereDc/" },
+      { label: "Long Tea — 05", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVueBfsw/" },
+      { label: "Long Tea — 06", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVuePnd9/" },
+      { label: "Long Tea — 07", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVue8g6C/" },
+      { label: "Long Tea — 08", platform: "TikTok · Brand Content", href: "https://vm.tiktok.com/ZSVue2yVf/" },
+    ],
+  },
+  {
+    n: "02",
+    title: "Pizza Hut",
+    icon: "🍕",
+    type: "Brand video",
+    format: "Instagram",
+    count: "01 project",
+    tone: "coral",
+    copy: "A social-first Pizza Hut brand edit built for Instagram.",
+    works: [
+      { label: "Pizza Hut", platform: "Instagram · Brand Video", href: "https://www.instagram.com/reel/DbVEgmvDvQ3/" },
+    ],
+  },
+  {
+    n: "03",
+    title: "Social Media",
+    icon: "📱",
+    type: "Social content",
+    format: "TikTok",
+    count: "12 projects",
+    tone: "violet",
+    copy: "Twelve platform-native short-form edits made for social audiences.",
+    works: [
+      { label: "Social Media — 01", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVuewU9V/" },
+      { label: "Social Media — 02", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVueKTfC/" },
+      { label: "Social Media — 03", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudAwDN/" },
+      { label: "Social Media — 04", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVuddmuf/" },
+      { label: "Social Media — 05", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudLD5y/" },
+      { label: "Social Media — 06", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudAUQV/" },
+      { label: "Social Media — 07", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudLkSo/" },
+      { label: "Social Media — 08", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudd6X3/" },
+      { label: "Social Media — 09", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudj5VG/" },
+      { label: "Social Media — 10", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudVWv4/" },
+      { label: "Social Media — 11", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudxXRb/" },
+      { label: "Social Media — 12", platform: "TikTok · Social Content", href: "https://vm.tiktok.com/ZSVudynUR/" },
+    ],
+  },
+  {
+    n: "04",
+    title: "Other Projects",
+    icon: "🎬",
+    type: "Video",
+    format: "YouTube",
+    count: "01 project",
+    tone: "blue",
+    copy: "Additional long-form and experimental video work.",
+    works: [
+      { label: "Other Project — 01", platform: "YouTube · Video", href: "https://youtu.be/gl6KID5tw0U" },
+    ],
+  },
 ];
 
 const services = [
@@ -27,6 +111,8 @@ function Arrow() {
 
 export default function PortfolioExperience() {
   const root = useRef<HTMLElement>(null);
+  const [activeProject, setActiveProject] = useState<string | null>(null);
+  const selectedProject = projects.find((project) => project.n === activeProject) ?? null;
 
   useGSAP(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -90,6 +176,27 @@ export default function PortfolioExperience() {
     gsap.to(".marquee-track", { xPercent: -50, duration: 22, repeat: -1, ease: "none" });
   }, { scope: root });
 
+  useGSAP(() => {
+    if (!activeProject) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    gsap.fromTo(
+      ".project-work-list",
+      { y: 28, opacity: 0 },
+      { y: 0, opacity: 1, duration: .55, ease: "power3.out" },
+    );
+    gsap.from(".project-work-link", {
+      y: 18,
+      opacity: 0,
+      duration: .45,
+      stagger: .035,
+      ease: "power3.out",
+    });
+    ScrollTrigger.refresh();
+  }, { scope: root, dependencies: [activeProject] });
+
   return (
     <main ref={root}>
       <div className="noise" aria-hidden="true" />
@@ -129,8 +236,56 @@ export default function PortfolioExperience() {
       </section>
 
       <section className="work wrap section" id="work">
-        <div className="work-head" data-reveal><div><span className="index">03 / SELECTED WORK</span><h2>STORIES<br />IN MOTION.</h2></div><p>Selected editing directions inspired by Mintesnot&apos;s commercial, social and cinematic work.</p></div>
-        <div className="project-grid">{projects.map((p) => <article className="project" key={p.n}><div className={`project-visual ${p.tone}`}><div className="project-top"><span>{p.n}</span><span>PLAY ↗</span></div><strong>{p.title}</strong><div className="wave">{Array.from({ length: 30 }).map((_, i) => <i key={i} style={{ height: `${20 + ((i * 19) % 64)}%` }} />)}</div><div className="project-bottom"><span>{p.format}</span><span>{p.count}</span></div></div><div className="project-meta"><h3>{p.title}</h3><p>{p.copy}</p><span>{p.type}</span></div></article>)}</div>
+        <div className="work-head" data-reveal><div><span className="index">03 / SELECTED WORK</span><h2>MY<br />PROJECTS.</h2></div><p>Choose a category to explore Mintesnot&apos;s original work. Every project below keeps the real links from the previous portfolio.</p></div>
+        <div className="project-grid">
+          {projects.map((p) => (
+            <article className="project" key={p.n}>
+              <button
+                type="button"
+                aria-expanded={activeProject === p.n}
+                aria-controls="selected-project-work"
+                onClick={() => setActiveProject((current) => current === p.n ? null : p.n)}
+                style={{ all: "unset", display: "block", width: "100%", cursor: "pointer" }}
+              >
+                <div
+                  className={`project-visual ${p.tone}`}
+                  style={activeProject === p.n ? { boxShadow: "10px 10px 0 #111" } : undefined}
+                >
+                  <div className="project-top"><span>{p.n}</span><span>{p.icon}</span></div>
+                  <strong>{p.title}</strong>
+                  <div className="wave">{Array.from({ length: 30 }).map((_, i) => <i key={i} style={{ height: `${20 + ((i * 19) % 64)}%` }} />)}</div>
+                  <div className="project-bottom"><span>{activeProject === p.n ? "CLOSE WORK" : "EXPLORE WORK ↓"}</span><span>{p.count}</span></div>
+                </div>
+                <div className="project-meta"><h3>{p.title}</h3><p>{p.copy}</p><span>{p.format}</span></div>
+              </button>
+            </article>
+          ))}
+        </div>
+
+        {selectedProject && (
+          <div id="selected-project-work" className="project-work-list" style={{ marginTop: 82 }}>
+            <div className="work-head" style={{ marginBottom: 42 }}>
+              <div><span className="index">{selectedProject.n} / CATEGORY</span><h2 style={{ marginTop: 28 }}>{selectedProject.title.toUpperCase()}</h2></div>
+              <p>{selectedProject.count}. Select a piece to open the original published work.</p>
+            </div>
+            <div className="service-list">
+              {selectedProject.works.map((work, index) => (
+                <a
+                  className="service project-work-link"
+                  href={work.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  key={work.href}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{work.label}</h3>
+                  <p>{work.platform}</p>
+                  <Arrow />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       <div className="marquee" aria-hidden="true"><div className="marquee-track">{[0,1].flatMap(loop => ["PREMIERE PRO","AFTER EFFECTS","MOTION","COLOR","SOUND DESIGN"].map(x => <span key={`${loop}-${x}`}>{x} <b>✦</b></span>))}</div></div>
