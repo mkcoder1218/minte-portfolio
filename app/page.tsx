@@ -1,5 +1,6 @@
 import PortfolioExperience from "@/components/portfolio-experience";
 import ProjectModalController from "@/components/project-modal-controller";
+import MotionDirector from "@/components/motion-director";
 import { getSiteUrl } from "@/lib/site-url";
 
 const siteUrl = getSiteUrl();
@@ -34,6 +35,7 @@ export default function Home() {
       />
       <PortfolioExperience />
       <ProjectModalController />
+      <MotionDirector />
     </>
   );
 }
