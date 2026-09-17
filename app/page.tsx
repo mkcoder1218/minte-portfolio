@@ -2,6 +2,7 @@ import PortfolioExperience from "@/components/portfolio-experience";
 import ProjectModalController from "@/components/project-modal-controller";
 import MotionDirector from "@/components/motion-director";
 import EditorialTexture from "@/components/editorial-texture";
+import HeroCutMonitor from "@/components/hero-cut-monitor";
 import { getSiteUrl } from "@/lib/site-url";
 
 const siteUrl = getSiteUrl();
@@ -38,6 +39,7 @@ export default function Home() {
       <ProjectModalController />
       <MotionDirector />
       <EditorialTexture />
+      <HeroCutMonitor />
     </>
   );
 }
