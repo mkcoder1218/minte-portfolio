@@ -104,7 +104,7 @@ export default function MotionDirector() {
           trigger,
           start,
           end: "bottom 18%",
-          toggleActions: "restart reverse restart reverse",
+          toggleActions: "restart none restart reverse",
         },
       });
       build(timeline);
