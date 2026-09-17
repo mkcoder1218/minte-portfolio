@@ -4,7 +4,7 @@ import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 import "./profile.css";
 import "./texture.css";
-import "./hero-cut.css";
+import "./hero-title.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
