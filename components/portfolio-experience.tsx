@@ -40,17 +40,48 @@ export default function PortfolioExperience() {
       .from(".edit-window", { y: 34, opacity: 0, scale: .985, duration: .8 }, "-=.35");
 
     gsap.to(".playhead", {
-      left: "86%", ease: "none",
-      scrollTrigger: { trigger: ".edit-window", start: "top 75%", end: "bottom 20%", scrub: true },
+      left: "86%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".edit-window",
+        start: "top 75%",
+        end: "bottom 20%",
+        scrub: true,
+      },
     });
 
     gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
-      gsap.from(el, { y: 42, opacity: 0, duration: .75, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 87%", once: true } });
+      gsap.from(el, {
+        y: 42,
+        opacity: 0,
+        duration: .75,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 87%",
+          end: "bottom 13%",
+          toggleActions: "restart reverse restart reverse",
+        },
+      });
     });
 
     gsap.utils.toArray<HTMLElement>(".project").forEach((card, i) => {
       const visual = card.querySelector(".project-visual");
-      gsap.from(card, { y: 58, opacity: 0, duration: .7, delay: i * .04, scrollTrigger: { trigger: card, start: "top 90%", once: true } });
+
+      gsap.from(card, {
+        y: 58,
+        opacity: 0,
+        duration: .7,
+        delay: i * .04,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 90%",
+          end: "bottom 10%",
+          toggleActions: "restart reverse restart reverse",
+        },
+      });
+
       if (!visual) return;
       card.addEventListener("mouseenter", () => gsap.to(visual, { scale: 1.025, rotate: i % 2 ? .5 : -.5, duration: .35 }));
       card.addEventListener("mouseleave", () => gsap.to(visual, { scale: 1, rotate: 0, duration: .35 }));
