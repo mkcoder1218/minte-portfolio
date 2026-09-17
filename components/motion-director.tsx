@@ -18,14 +18,13 @@ export default function MotionDirector() {
     });
 
     const staleTargets = gsap.utils.toArray<HTMLElement>(
-      ".nav,.eyebrow,.hero-line,.hero-foot > *,.edit-window,.playhead,[data-reveal],.project,.project-visual,.service,.marquee-track",
+      ".nav,.eyebrow,.hero-foot > *,.edit-window,.playhead,[data-reveal],.project,.project-visual,.service,.marquee-track",
     );
 
     gsap.killTweensOf(staleTargets);
     gsap.set(staleTargets, { clearProps: "transform,opacity,clipPath,filter" });
 
     const intro = gsap.timeline({ defaults: { ease: "expo.out" } });
-    gsap.set(".hero-line", { transformOrigin: "0% 100%" });
 
     intro
       .fromTo(
@@ -35,14 +34,9 @@ export default function MotionDirector() {
       )
       .from(".eyebrow span", { yPercent: 160, opacity: 0, stagger: 0.08, duration: 0.6 }, "-=0.55")
       .from(
-        ".hero-line",
-        { yPercent: 120, skewY: 7, scaleY: 0.84, stagger: 0.11, duration: 1.05 },
-        "-=0.45",
-      )
-      .from(
         ".hero-foot p",
         { clipPath: "inset(0 0 100% 0)", y: 28, duration: 0.7 },
-        "-=0.58",
+        "-=0.28",
       )
       .from(".hero-foot .btn", { x: 28, opacity: 0, stagger: 0.07, duration: 0.55 }, "-=0.46");
 
