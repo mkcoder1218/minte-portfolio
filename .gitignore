@@ -1,8 +1,8 @@
 node_modules
 .next
 out
-.env*
 !.env.example
 .DS_Store
 *.log
 .vercel
+config.bat
