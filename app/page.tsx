@@ -1,4 +1,5 @@
 import PortfolioExperience from "@/components/portfolio-experience";
+import ProjectModalController from "@/components/project-modal-controller";
 import { getSiteUrl } from "@/lib/site-url";
 
 const siteUrl = getSiteUrl();
@@ -32,6 +33,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <PortfolioExperience />
+      <ProjectModalController />
     </>
   );
 }
