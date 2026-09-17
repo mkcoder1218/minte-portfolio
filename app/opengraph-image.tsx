@@ -22,8 +22,18 @@ export default function Image() {
         <span>MINTESNOT.</span>
         <span>VIDEO EDITOR · 2026</span>
       </div>
-      <div style={{ fontSize: 110, lineHeight: 0.9, letterSpacing: "-6px", fontWeight: 700 }}>
-        VISUAL<br />STORIES.
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          fontSize: 110,
+          lineHeight: 0.9,
+          letterSpacing: "-6px",
+          fontWeight: 700,
+        }}
+      >
+        <span>VISUAL</span>
+        <span>STORIES.</span>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24 }}>
         <span>EDIT · CREATE · REPEAT</span>
