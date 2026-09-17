@@ -14,9 +14,11 @@ export default function Home() {
     name: "Mintesnot Saleamlak",
     jobTitle: "Video Editor & Visual Storyteller",
     url: siteUrl,
+    email: "mailto:Mintesnotsaleamlak@gmail.com",
+    telephone: "0905559398",
     sameAs: [
       "https://www.instagram.com/outofsync.genz/",
-      "https://wa.me/251905559398",
+      "https://linkedin.com/in/mintesnot-saleamlak-133391365",
     ],
     knowsAbout: [
       "Video Editing",
