@@ -5,6 +5,7 @@ import "./globals.css";
 import "./profile.css";
 import "./texture.css";
 import "./hero-title.css";
+import "./mobile.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });

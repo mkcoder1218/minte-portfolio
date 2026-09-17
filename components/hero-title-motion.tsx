@@ -17,6 +17,7 @@ export default function HeroTitleMotion() {
     if (!hero || !headline || lines.length < 2) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const compact = window.matchMedia("(max-width: 760px)").matches;
     const originals = lines.map((line) => line.textContent ?? "");
 
     lines.forEach((line, lineIndex) => {
@@ -54,7 +55,7 @@ export default function HeroTitleMotion() {
     gsap.killTweensOf(allChars);
     gsap.set(lines, { clearProps: "transform,opacity,filter,clipPath" });
     gsap.set(allChars, {
-      transformPerspective: 900,
+      transformPerspective: compact ? 650 : 900,
       transformOrigin: "50% 100%",
       backfaceVisibility: "hidden",
     });
@@ -65,12 +66,12 @@ export default function HeroTitleMotion() {
       .fromTo(
         firstLineChars,
         {
-          yPercent: (index) => 125 + (index % 3) * 16,
-          rotateX: (index) => (index % 2 === 0 ? -88 : 88),
-          rotateZ: (index) => (index % 2 === 0 ? -7 : 7),
-          scale: 0.68,
+          yPercent: (index) => (compact ? 96 : 125) + (index % 3) * (compact ? 9 : 16),
+          rotateX: (index) => (index % 2 === 0 ? (compact ? -56 : -88) : compact ? 56 : 88),
+          rotateZ: (index) => (index % 2 === 0 ? (compact ? -4 : -7) : compact ? 4 : 7),
+          scale: compact ? 0.8 : 0.68,
           opacity: 0,
-          filter: "blur(9px)",
+          filter: `blur(${compact ? 5 : 9}px)`,
           color: (index) => accentColors[index % accentColors.length],
         },
         {
@@ -81,19 +82,19 @@ export default function HeroTitleMotion() {
           opacity: 1,
           filter: "blur(0px)",
           color: "#111111",
-          duration: 1.02,
-          stagger: { each: 0.042, from: "edges" },
+          duration: compact ? 0.82 : 1.02,
+          stagger: { each: compact ? 0.03 : 0.042, from: "edges" },
         },
       )
       .fromTo(
         secondLineChars,
         {
-          yPercent: (index) => 140 + (index % 4) * 13,
-          rotateX: (index) => (index % 2 === 0 ? 92 : -92),
-          rotateZ: (index) => (index % 2 === 0 ? 6 : -6),
-          scale: 0.64,
+          yPercent: (index) => (compact ? 105 : 140) + (index % 4) * (compact ? 8 : 13),
+          rotateX: (index) => (index % 2 === 0 ? (compact ? 58 : 92) : compact ? -58 : -92),
+          rotateZ: (index) => (index % 2 === 0 ? (compact ? 4 : 6) : compact ? -4 : -6),
+          scale: compact ? 0.78 : 0.64,
           opacity: 0,
-          filter: "blur(10px)",
+          filter: `blur(${compact ? 5 : 10}px)`,
           color: (index) => accentColors[(index + 1) % accentColors.length],
         },
         {
@@ -104,17 +105,17 @@ export default function HeroTitleMotion() {
           opacity: 1,
           filter: "blur(0px)",
           color: "#111111",
-          duration: 1.08,
-          stagger: { each: 0.036, from: "center" },
+          duration: compact ? 0.9 : 1.08,
+          stagger: { each: compact ? 0.026 : 0.036, from: "center" },
         },
-        "-=0.72",
+        compact ? "-=0.58" : "-=0.72",
       );
 
     if (dot) {
       intro.fromTo(
         dot,
-        { scale: 0, rotate: 180, color: accentColors[1] },
-        { scale: 1, rotate: 0, color: "#111111", duration: 0.5, ease: "back.out(2.7)" },
+        { scale: 0, rotate: compact ? 120 : 180, color: accentColors[1] },
+        { scale: 1, rotate: 0, color: "#111111", duration: compact ? 0.38 : 0.5, ease: "back.out(2.7)" },
         "-=0.28",
       );
     }
@@ -124,18 +125,37 @@ export default function HeroTitleMotion() {
         trigger: hero,
         start: "top top",
         end: "bottom top",
-        scrub: 0.8,
+        scrub: compact ? 0.45 : 0.8,
       },
     });
 
     scrollTimeline
-      .to(lines[0], { xPercent: -4.5, scaleX: 1.045, skewX: -1.1, ease: "none" }, 0)
-      .to(lines[1], { xPercent: 4.5, scaleX: 0.96, skewX: 1.1, ease: "none" }, 0)
+      .to(
+        lines[0],
+        {
+          xPercent: compact ? -1.2 : -4.5,
+          scaleX: compact ? 1.012 : 1.045,
+          skewX: compact ? -0.35 : -1.1,
+          ease: "none",
+        },
+        0,
+      )
+      .to(
+        lines[1],
+        {
+          xPercent: compact ? 1.2 : 4.5,
+          scaleX: compact ? 0.992 : 0.96,
+          skewX: compact ? 0.35 : 1.1,
+          ease: "none",
+        },
+        0,
+      )
       .to(
         allChars,
         {
-          yPercent: (index) => (index % 2 === 0 ? -8 : 8),
-          rotateZ: (index) => (index % 3 === 0 ? -1.2 : index % 3 === 1 ? 1.2 : 0),
+          yPercent: (index) => (index % 2 === 0 ? (compact ? -3 : -8) : compact ? 3 : 8),
+          rotateZ: (index) =>
+            index % 3 === 0 ? (compact ? -0.4 : -1.2) : index % 3 === 1 ? (compact ? 0.4 : 1.2) : 0,
           ease: "none",
         },
         0,
